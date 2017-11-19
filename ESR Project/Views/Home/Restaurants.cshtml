@@ -1,0 +1,396 @@
+﻿@{
+    ViewBag.Title = "Restaurants";
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        var id = 0;
+        var funcName = "AddTag";
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:57732/api/restaurants/GetAllRestaurants?id=" + id + "", //URI
+            dataType: "json",
+            success: function (data) {
+                debugger;
+                var datavalue = data;
+                var myJsonObject = datavalue;
+                contentType: "application/json";
+                $.each(myJsonObject, function (i, mobj) {
+
+                    $("#restaurants").append('<div class="col-md-3 col-sm-6 col-xs-12">' +
+                        '<div class="single-shop-product">' +
+                        ' <div class="ssp-img">' +
+                        '<img src="@Url.Content("~/Content/Template/")img/shop/item1.jpg" alt="">'+
+                        ' </div>'+
+                        '<div class="ssp-content">'+
+                        '<h4>'+mobj.Name+'</h4> '+
+                        '<span class="sspc-price">' + mobj.Discount + '</span>' +
+                        '<span class="sspc-price">' + mobj.Area + '</span>' +
+                        '<div class="form-group">'+
+                        '<label class="col-md-5 control-label" id=' + mobj.Id + '><a href="#/" data-toggle="modal" data-target="#squarespaceModal2" id="addTagstorest" onclick="  return GetTags(' + mobj.Id +')">Get Coupon</a></label>'+
+                        '</div>'+
+                        '<sp> '+
+                        ' <div class="sspc-rating">'+
+                        ' <div class="rating">'+
+                        '<div class="star star-on"></div>'+
+                        '<div class="star star-on"></div>'+
+                        '<div class="star star-on" ></div>'+
+                        '<div class="star star-on" ></div>'+
+                        '<div class="star star-half" ></div>'+
+                        '</div > '+
+                        '<span class="sspc-rating-counter">(3)</span>' +
+                        '</div>'+
+                        '<p class="sspc-type">Fresh Meal, Organic Dairy</p>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>');
+                });
+
+            },
+            error: function (xhr) {
+                    bootbox.alert('Internel Error...');
+            }
+        });
+
+    });
+    var restid = 0;
+
+   function GetTags(id)
+   {
+       restid = id;
+        $("#TagTable").empty();
+        var count1 = 0;
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:57732/api/restaurants/GetAllRestTagsById?id=" + id + "", //URI
+            dataType: "json",
+            success: function (data) {
+                debugger;
+                var datavalue = data;
+                var myJsonObject = datavalue;
+                contentType: "application/json";
+                $.each(myJsonObject, function (i, mobj) {
+
+                    $.ajax({
+                        type: "GET",
+                        url: "http://localhost:57732/api/tags/GetAllTagsById?id=" + mobj.TagId + "", //URI
+                        dataType: "json",
+                        success: function (data) {
+                            debugger;
+                            var datavalue = data;
+                            var myJsonObject = datavalue;
+                            contentType: "application/json";
+                            $.each(myJsonObject, function (i, mobj1) {
+
+                                $("#TagTable").append(' <tr id="jawad' + mobj.Id + '"> ' +
+                                    '               <td><input type="checkbox" class="checkbox" name="checkboxforTag' + mobj.Id + '" value="' + mobj1.Id + '"></td>' +
+                                    '               <td>' + mobj1.Description + ' </td>' +
+                                    '</tr>');
+
+                            });
+                        },
+                        error: function (xhr) {
+                            bootbox.alert('Internel Error...');
+                        }
+                    });
+
+                });
+            },
+            error: function (xhr) {
+                bootbox.alert('Internel Error...');
+            }
+        });
+        return false;
+   }
+    function ValidateRestaurantForm() {
+
+        var da={
+            RestaurantId: restid, UserId:'@ViewBag.UserId',
+        };
+
+        var ClientData = JSON.stringify(da);
+
+
+       var ajaxRequest = $.ajax({
+           type: "POST",
+           url: "http://localhost:57732/api/restaurants/PostCoupon",
+           contentType: 'application/json; charset=utf-8',
+           processData: false,
+           dataType: "json",
+           data: ClientData,
+           success: function (data, textStatus, xhr) {
+               if (data == 0) {
+                   document.getElementById("BtnClient").disabled = false;
+                   bootbox.alert('Try Again! Later...');
+
+               }
+               else {
+                   $("#CouponNumber").val(data);
+                   var pack = "";
+                   $("input:checkbox[name=checkboxforTag" + restid+"]:checked").each(function () {
+
+                       pack = data + "," + $(this).val();
+
+                       $.ajax({
+                           type: "POST",
+                           url: "http://localhost:57732/api/restaurants/PostCouponTags?id=" + pack + "",
+                           contentType: 'application/json; charset=utf-8',
+                           processData: false,
+                           dataType: "json",
+                           data: CarreerData,
+                           success: function (data, textStatus, xhr) {
+
+                           },
+
+                       });
+
+                   });
+
+               }
+           },
+           error: function (xhr, textStatus, errorThrown) {
+
+               bootbox.alert('Server is not responding! Try Again Later');
+
+           }
+       });
+
+
+   }
+
+</script>
+<script>
+    function GetSingleRestaurantByName() {
+        var funcName = "RestaurantUpdate";
+        var count = 0;
+        $("#restaurants").empty();
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:57732/api/restaurants/GetAllRestaurantsByName?id=" + document.getElementById("RestaurantSearch").value + "", //URI
+            dataType: "json",
+            success: function (data) {
+                debugger;
+                var datavalue = data;
+                var myJsonObject = datavalue;
+                contentType: "application/json";
+                $.each(myJsonObject, function (i, mobj) {
+                    $("#restaurants").append('<div class="col-md-3 col-sm-6 col-xs-12">' +
+                        '<div class="single-shop-product">' +
+                        ' <div class="ssp-img">' +
+                       '<img src="@Url.Content("~/Content/Template/")img/shop/item1.jpg" alt="">'+
+                       ' </div>'+
+                        '<div class="ssp-content">' +
+                        '<a class="sspc-title" onclick="myFunctionSwapView2("AddTag",'+mobj.Id +');" id=' + mobj.Id + '>' + mobj.Name + ' </a>' +
+                        '<span class="sspc-price">' + mobj.Discount + '</span>' +
+                        '<span class="sspc-price">' + mobj.Area + '</span>' +
+                        '<div class="form-group">' +
+                        '<label class="col-md-5 control-label" id=' + mobj.Id + '><a href="#/" data-toggle="modal" data-target="#squarespaceModal2" id="addTagstorest" onclick="  return GetTags(' + mobj.Id + ')">Get Coupon</a></label>' +
+                        '</div>' +
+                               '<sp> '+
+                       ' <div class="sspc-rating">'+
+                           ' <div class="rating">'+
+                               '<div class="star star-on"></div>'+
+                              '<div class="star star-on"></div>'+
+                             '<div class="star star-on" ></div>'+
+                            '<div class="star star-on" ></div>'+
+                           '<div class="star star-half" ></div>'+
+                          '</div > '+
+                            '<span class="sspc-rating-counter">(3)</span>' +
+                        '</div>'+
+                        '<p class="sspc-type">Fresh Meal, Organic Dairy</p>'+
+                    '</div>'+
+                '</div>'+
+            '</div>');
+
+
+                });
+
+            },
+            error: function (xhr) {
+                bootbox.alert('Internel Error...');
+            }
+        });
+        document.getElementById("RestaurantSearch").value = "";
+        return false;
+    }
+
+
+    function TagsCheckingCheckboxes()
+    {
+        var select_all = document.getElementById("select_all"); //select all checkbox
+        var checkboxes = document.getElementsByClassName("checkbox"); //checkbox items
+
+        //select all checkboxes
+        select_all.addEventListener("change", function (e) {
+            for (i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = select_all.checked;
+            }
+        });
+
+
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].addEventListener('change', function (e) { //".checkbox" change
+                //uncheck "select all", if one of the listed checkbox item is unchecked
+                if (this.checked == false) {
+                    select_all.checked = false;
+                }
+                //check "select all" if all checkbox items are checked
+                if (document.querySelectorAll('.checkbox:checked').length == checkboxes.length) {
+                    select_all.checked = true;
+                }
+            });
+        }
+        return false;
+    }
+</script>
+<!-- shop-area-start -->
+<div class="shop-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="shop-area-head">
+                    <div class="box-tools pull-right">
+                        <div class="has-feedback" id="searchbar1">
+                            <section id="ajax-example1">
+                                <form action="#/" onsubmit="return GetSingleRestaurantByName()">
+                                    <input type="text" class="form-control input-sm" placeholder="Search for Restaurant" required name="RestaurantSearch" id="RestaurantSearch">
+                                </form>
+                                <script>
+                                    var ajax = new XMLHttpRequest();
+                                    ajax.open("GET", "http://localhost:57732/api/restaurants/GetAllClassesNames", true);
+                                    ajax.onload = function () {
+                                        var list = JSON.parse(ajax.responseText).map(function (i) { return i.Name; });
+                                        new Awesomplete(document.querySelector("#ajax-example1 input"), { list: list });
+                                    };
+                                    ajax.send();
+                                </script>
+                            </section>
+
+
+
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="">
+                        <h6>Our Proud Partners</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="restaurants">
+
+
+        </div>
+    </div>
+</div>
+<!-- shop-area-end -->
+
+<div class="modal fade" id="squarespaceModal2" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content  row">
+            <div class="modal-header" style="color:white;background-color:#222222;">
+               
+                <h3 class="modal-title">TAGS</h3>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <br />
+
+                <div id="TagforRest" class="mainbox col-md-12">
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-md-12">
+                            <div class="box box-primary">
+                                
+                                <!-- /.box-header -->
+                                <div class="box-body no-padding">
+                                    <div class="mailbox-controls">
+
+                                        <!-- /.pull-right -->
+                                    </div>
+                                    <div class="table-responsive mailbox-messages">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <a href="#/" class="" onclick="TagsCheckingCheckboxes()" data-toggle="tooltip" title="Select All">
+                                                            <input type="checkbox" id="select_all" />
+                                                        </a>
+                                                    </th>
+                                                    <th>Tag Description
+
+                                                </tr>
+                                            </thead>
+                                            <tbody id="TagTable"></tbody>
+                                        </table>
+                                        <!-- /.table -->
+                                    </div>
+                                    <!-- /.mail-box-messages -->
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer no-padding">
+                                    <div class="form-group" style="margin-top:10px;">
+                                        <!-- Button -->
+                                        <div class="col-sm-12 controls" style="margin-bottom:10px;">
+                                            <button id="btnyes" type="button" onclick="$('#TagforRest').hide();$('#Coupon').show(); ValidateRestaurantForm()" class="btn btn-info"><i class="icon-hand-right"></i>Generate</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /. box -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+
+                <div id="Coupon" class="mainbox col-md-12" hidden>
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-md-12">
+                            <div class="box box-primary">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Coupon Number</h3>
+
+
+                                    <!-- /.box-tools -->
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body no-padding">
+                                    <div class="mailbox-controls">
+
+                                        <!-- /.pull-right -->
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Coupon #</label>
+                                        <div class="col-md-9">
+                                            <input type="number" class="form-control" id="CouponNumber" disabled>
+                                        </div>
+                                    </div>
+                                    <!-- /.mail-box-messages -->
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer no-padding">
+                                    <div class="form-group" style="margin-top:10px">
+                                        <!-- Button -->
+                                        <div class="col-sm-12 controls pull-right" style="margin-bottom:10px;">
+                                            <button id="btnyes" type="button" data-dismiss="modal" onclick="$('#squarespaceModal2').modal('hide'); $('#Coupon').hide(); $('#TagforRest').show(); " class="btn btn-info"><i class="icon-hand-right"></i>Used</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /. box -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

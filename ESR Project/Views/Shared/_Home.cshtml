@@ -1,0 +1,865 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .carousel-inner > .item > img {
+            width: auto;
+            height: 200px;
+        }
+
+        .nav-tabs {
+            margin-bottom: 15px;
+        }
+
+        .sign-with {
+            margin-top: 25px;
+            padding: 20px;
+        }
+
+        div#OR {
+            height: 30px;
+            width: 30px;
+            border: 1px solid #C2C2C2;
+            border-radius: 50%;
+            font-weight: bold;
+            line-height: 28px;
+            text-align: center;
+            font-size: 12px;
+            float: right;
+            position: absolute;
+            right: -16px;
+            top: 40%;
+            z-index: 1;
+            background: #DFDFDF;
+        }
+        /*carousel*/
+
+        .transition-timer-carousel .carousel-caption {
+            background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 4%, rgba(0,0,0,0.5) 32%, rgba(0,0,0,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(4%,rgba(0,0,0,0.1)), color-stop(32%,rgba(0,0,0,0.5)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.1) 4%,rgba(0,0,0,0.5) 32%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.1) 4%,rgba(0,0,0,0.5) 32%,rgba(0,0,0,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.1) 4%,rgba(0,0,0,0.5) 32%,rgba(0,0,0,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.1) 4%,rgba(0,0,0,0.5) 32%,rgba(0,0,0,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+            width: 100%;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            text-align: left;
+            padding-top: 5px;
+            padding-left: 15%;
+            padding-right: 15%;
+        }
+
+            .transition-timer-carousel .carousel-caption .carousel-caption-header {
+                margin-top: 10px;
+                font-size: 24px;
+            }
+
+        media (min-width: 970px) {
+            /* Lower the font size of the carousel caption header so that our caption
+    doesn't take up the full image/slide on smaller screens */
+            .transition-timer-carousel .carousel-caption .carousel-caption-header
+
+        {
+            font-size: 36px;
+        }
+
+        }
+
+        .transition-timer-carousel .carousel-indicators {
+            bottom: 0px;
+            margin-bottom: 5px;
+        }
+
+        .transition-timer-carousel .carousel-control {
+            z-index: 11;
+        }
+
+        .transition-timer-carousel .transition-timer-carousel-progress-bar {
+            height: 5px;
+            background-color: #5cb85c;
+            width: 0%;
+            margin: -5px 0px 0px 0px;
+            border: none;
+            z-index: 11;
+            position: relative;
+        }
+
+            .transition-timer-carousel .transition-timer-carousel-progress-bar.animate {
+                /* We make the transition time shorter to avoid the slide transitioning
+    before the timer bar is "full" - change the 4.25s here to fit your
+    carousel's transition time */
+                -webkit-transition: width 4.25s linear;
+                -moz-transition: width 4.25s linear;
+                -o-transition: width 4.25s linear;
+                transition: width 4.25s linear;
+            }
+
+
+        ********************************/ .fade-carousel {
+            position: relative;
+            height: 100vh;
+        }
+
+        .fade-carousel .carousel-inner .item {
+            height: 100vh;
+        }
+
+        .fade-carousel .carousel-indicators > li {
+            margin: 0 2px;
+            background-color: #f39c12;
+            border-color: #f39c12;
+            opacity: .7;
+        }
+
+            .fade-carousel .carousel-indicators > li.active {
+                width: 10px;
+                height: 10px;
+                opacity: 1;
+            }
+
+        /********************************/
+        /*          Hero Headers        */
+        /********************************/
+        .hero {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 3;
+            color: #fff;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 0 rgba(0,0,0,.75);
+            -webkit-transform: translate3d(-50%,-50%,0);
+            -moz-transform: translate3d(-50%,-50%,0);
+            -ms-transform: translate3d(-50%,-50%,0);
+            -o-transform: translate3d(-50%,-50%,0);
+            transform: translate3d(-50%,-50%,0);
+        }
+
+            .hero h1 {
+                font-size: 6em;
+                font-weight: bold;
+                margin: 0;
+                padding: 0;
+            }
+
+        .fade-carousel .carousel-inner .item .hero {
+            opacity: 0;
+            -webkit-transition: 2s all ease-in-out .1s;
+            -moz-transition: 2s all ease-in-out .1s;
+            -ms-transition: 2s all ease-in-out .1s;
+            -o-transition: 2s all ease-in-out .1s;
+            transition: 2s all ease-in-out .1s;
+        }
+
+        .fade-carousel .carousel-inner .item.active .hero {
+            opacity: 1;
+            -webkit-transition: 2s all ease-in-out .1s;
+            -moz-transition: 2s all ease-in-out .1s;
+            -ms-transition: 2s all ease-in-out .1s;
+            -o-transition: 2s all ease-in-out .1s;
+            transition: 2s all ease-in-out .1s;
+        }
+
+        /********************************/
+        /*            Overlay           */
+        /********************************/
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background-color: #080d15;
+            opacity: .7;
+        }
+    </style>
+    <!--- Basic Page Needs  -->
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile Specific Meta  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script:400,700" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../Content/facebook.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+
+
+    <!-- Search Autocomplete-->
+    <link rel="stylesheet" href="../../Content/Autocomplete/prism/prism.css" />
+    <link rel="stylesheet" href="../../Content/Autocomplete/awesomplete.css" />
+    <script src="../../Content/Autocomplete/awesomplete.js"></script>
+    <script src="../../Content/Autocomplete/prism/prism.js" defer></script>
+
+    <!-- Css for reaction system -->
+
+    <link rel="stylesheet" href="../../Content/Template/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../Content/Template/css/icofont.css">
+    <link rel="stylesheet" href="../../Content/Template/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../Content/Template/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../Content/Template/css/animate.css">
+    <link rel="stylesheet" href="../../Content/Template/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="../../Content/Template/css/jquery-ui.css">
+    <link rel="stylesheet" href="../../Content/Template/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="../../Content/Template/css/meanmenu.css">
+    <link rel="stylesheet" href="../../Content/Template/css/typography.css">
+    <link rel="stylesheet" href="../../Content/Template/css/style.css">
+    <link rel="stylesheet" href="../../Content/Template/css/responsive.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="img/favicon.ico">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.../../Content/Template/js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+
+<body data-spy="scroll" data-target="#scroll-menu" data-offset="50">
+    <div id="preloader"></div>
+    <!-- Scripts -->
+    <script src="../../Content/Template/js/jquery-3.2.0.min.js"></script>
+    <script src="../../Content/Template/js/owl.carousel.min.js"></script>
+    <script src="../../Content/Template/js/jquery.counterup.min.js"></script>
+    <script src="../../Content/Template/js/countdown.js"></script>
+    <script src="../../Content/Template/js/jquery.timepicker.min.js"></script>
+    <script src="../../Content/Template/js/jquery.fancybox.min.js"></script>
+    <script src="../../Content/Template/js/jquery.meanmenu.js"></script>
+    <script src="../../Content/Template/js/jquery-ui.js"></script>
+    <script src="../../Content/Template/js/jquery.scrollUp.js"></script>
+    <script src="../../Content/Template/js/jquery.mixitup.min.js"></script>
+    <script src="../../Content/Template/js/jquery.waypoints.min.js"></script>
+    <script src="../../Content/Template/js/bootstrap.min.js"></script>
+    <script src="../../Content/Template/js/theme.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1505036122923009';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <script>
+
+         $(document).ready(function () {
+
+             document.getElementById('@ViewBag.Title').style.textDecoration ="underline";
+        });
+
+
+        function validateSignUpForm() {
+            document.getElementById("btnsignupTrainee").disabled = true;
+            if ($("#TraineePassword").val() == $("#TraineePasswordConfirmation").val()) {
+                var FitnessMember = {
+                    FullName: $("#TraineeFirstname").val(), UserName: $("#TraineeUsername").val(), Email: $("#TraineeEmail").val(),
+                    Phone: $("#TrineePhone").val(), Address: $("#TraneeAddress").val(), EmergencyContact: $("#TraneeEmergencyContact").val(),
+                    Password: $("#TraineePassword").val(), ConfirmPassword: $("#TraineePasswordConfirmation").val(), DateOfBirth: $("#TraineeBirth").val()
+                };
+
+
+                var FitnessMemberData = JSON.stringify(FitnessMember);
+
+                // Make Ajax request with the contentType = false, and procesDate = false
+                var ajaxRequest = $.ajax({
+                    type: "POST",
+                    url: "http://localhost:57732/api/user/PostUser",
+                    contentType: 'application/json; charset=utf-8',
+                    processData: false,
+                    dataType: "json",
+                    data: FitnessMemberData,
+                    success: function (data, textStatus, xhr) {
+                        if (data == 0) {
+                            bootbox.alert('Try Again! Username Already Registered...');
+                            document.getElementById("TraineeUsername").value = "";
+                            document.getElementById("TraineePassword").value = "";
+                            document.getElementById("TraineePasswordConfirmation").value = "";
+                            document.getElementById("btnsignupTrainee").disabled = false;
+                        }
+                        else {
+                            document.getElementById("btnsignupTrainee").disabled = false;
+                            $('#FitnessMemberForm')[0].reset();
+                            $('#squarespaceModal').modal('hide');
+                            bootbox.alert('Try Again! Username Already Registered...');
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        bootbox.alert('Server is not responding! Try Again Later');
+                        document.getElementById("btnsignupTrainee").disabled = false;
+                    }
+                });
+                return false;
+            }
+            else {
+                bootbox.alert("Make Sure Passwords are Same!");
+                document.getElementById("TraineePassword").value = "";
+                document.getElementById("TraineePasswordConfirmation").value = "";
+                document.getElementById("btnsignupTrainee").disabled = false;
+                return false;
+            }
+
+
+        }
+        function validateSignUpForm1() {
+            alert("haha");
+            document.getElementById("btnlogin").disabled = true;
+            if ($("#login-password").val()!="" && $("#login-username").val()!="") {
+                var FitnessMember = {
+                    Password: $("#login-password").val(), UserName: $("#login-username").val()
+                };
+
+                alert("hahaha");
+                var FitnessMemberData = JSON.stringify(FitnessMember);
+
+                // Make Ajax request with the contentType = false, and procesDate = false
+                var ajaxRequest = $.ajax({
+                    type: "POST",
+                    url: "http://localhost:57732/api/user/checkLogin",
+                    contentType: 'application/json; charset=utf-8',
+                    processData: false,
+                    dataType: "json",
+                    data: FitnessMemberData,
+                    success: function (data, textStatus, xhr) {
+                        if (data == 0) {
+                            alert("haha!!");
+                            bootbox.alert('Try Again! Username Already Registered...');
+                            document.getElementById("login-password").value = "";
+                            document.getElementById("login-username").value = "";
+
+                            document.getElementById("btnsignupTrainee").disabled = false;
+                        }
+                        else {
+                            alert("hahahahahahaah");
+                            document.getElementById("btnlogin").disabled = false;
+                            $('#login-password')[0].reset();
+                            $('#login-username').modal('hide');
+                            bootbox.alert('Try Again! Username Already Registered...');
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        bootbox.alert('Server is not responding! Try Again Later');
+                        document.getElementById("btnlogin").disabled = false;
+                    }
+                });
+                return false;
+            }
+            else {
+                bootbox.alert("Make Sure Passwords are Same!");
+                document.getElementById("TraineePassword").value = "";
+                document.getElementById("TraineePasswordConfirmation").value = "";
+                document.getElementById("btnlogin").disabled = false;
+                return false;
+            }
+
+
+        }
+
+        function Send()
+        {
+            var g = "false";
+            if ($("#input5").val() != "" && $("#input4").val() != "" && $("#input1").val() != "" && $("#input6").val() != "") {
+
+
+                var data = new FormData();
+                document.getElementById("send").disabled = true;
+                data.append("Name", $("#input1").val());
+                data.append("Email", $("#input4").val());
+                data.append("Message", $("#input5").val());
+                data.append("Password", $("#input6").val());
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("PostSendMessage", "Home")",
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (data, textStatus, xhr) {
+                        if (data == "true") {
+
+                            document.getElementById("input1").value = "";
+                            document.getElementById("input4").value = "";
+                            document.getElementById("input5").value = "";
+                            document.getElementById("input6").value = "";
+                            $("#input1").val("");
+                            $("#input2").val("");
+                            $("#input3").val("");
+                            $("#input4").val("");
+                            $("#input5").val("");
+                            $("#input6").val("");
+
+                            document.getElementById("send").disabled = false;
+                            alert("Message Sent!");
+                        }
+                        else {
+
+
+                            document.getElementById("send").disabled = false;
+                            alert('Something went wrong. try again Later');
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+
+                        bootbox.alert('Server is not responding! Try Again Later');
+                        document.getElementById("send").disabled = false;
+                        alert('Server is not responding! Try Again Later');
+                    }
+                });
+
+
+            }
+            else {
+                alert("Feilds are empty");
+
+            }
+        }
+    </script>
+
+    <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content  row">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <br />
+
+                    <div id="loginbox" class="mainbox col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title">Login</div>
+                                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#/" style="color:blue;">Forgot password?</a></div>
+                            </div>
+
+                            <div style="padding-top:30px" class="panel-body">
+
+                                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                                <form id="loginform" class="form-horizontal" role="form">
+
+                                    <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                        <input id="login-username" type="text" class="form-control" name="username" required value="" placeholder="username">
+                                    </div>
+
+                                    <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                        <input id="login-password" type="password" class="form-control" name="password" required placeholder="password">
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="col-sm-12">
+                                            <label style="color:red;" id="ErrorMessage" hidden>
+                                                Username or Password is Incorrect! Try Again.
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="input-group">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+                                                </label>
+                                            </div>
+                                        </div>*@
+                                    <div class="form-group" style="margin-top:10px">
+                                        <!-- Button -->
+                                        <div class="col-sm-12 controls">
+                                            <button id="btnlogin" type="button" onclick="$('#squarespaceModal').modal('hide');validateSignUpForm1()" class="btn btn-info"><i class="icon-hand-right"></i>Login</button>
+
+                                        </div><li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                    </div>
+
+
+                                    <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12 control">
+                                    <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                                        Don't have an account!
+                                        <a href="#" onclick="$('#loginbox').hide(); $('#signupbox').show()" style="color:blue;">
+                                            Register Here
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div id="signupbox" style="display:none;" class="mainbox col-md-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Sign Up</div>
+                            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" style="color:blue;" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+                        </div>
+                        <div class="panel-body">
+                            <form id="FitnessMemberForm" action="#/" method="post" onsubmit="return validateSignUpForm()" class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label for="email" class="col-md-3 control-label">Email*</label>
+                                    <div class="col-md-9">
+                                        <input type="email" class="form-control" name="TraineeEmail" id="TraineeEmail" required placeholder="abc@gmail.com">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="firstname" class="col-md-3 control-label">Full Name* </label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="TraineeFirstname" required id="TraineeFirstname" placeholder="AlbertPinto">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="lastname" class="col-md-3 control-label">Username*</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="TraineeUsername" pattern="(.){8,50}" required id="TraineeUsername" placeholder="AxypJLMt:min 8 characters">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Password*</label>
+                                    <div class="col-md-9">
+                                        <input type="password" min="8" class="form-control" pattern="(.){8,50}" name="password" id="TraineePassword" required placeholder="min-8 characters">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Confirm_Pass*</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" name="passwordConfirmed" pattern="(.){8,50}" id="TraineePasswordConfirmation" required placeholder="Same As Above">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Mobile #</label>
+                                    <div class="col-md-9">
+                                        <input type="tel" pattern="(.){10,10}" maxlength="10" onkeypress='validate(event)' class="form-control" name="TraineePhone" id="TrineePhone" placeholder="2371239449">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Emergency Contact #</label>
+                                    <div class="col-md-9">
+                                        <input type="tel" pattern="(.){10,10}" maxlength="10" onkeypress='validate(event)' class="form-control" name="TraneeEmergencyContact" id="TraneeEmergencyContact" placeholder="2371239449">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="icode" class="col-md-3 control-label">Date Of Birthday</label>
+                                    <div class="col-md-9">
+                                        <input type="date" class="form-control" name="TraineeBirth" id="TraineeBirth">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="icode" class="col-md-3 control-label">Address</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="Address" id="TraneeAddress" placeholder="Calefornia B Town">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <!-- Button -->
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button id="btnsignupTrainee" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
+
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="color:white;background-color:#222222;">
+                   
+                    <h3 class="modal-title">Email Us</h3>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input1" placeholder="Name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Phone</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="input4" placeholder="Phone" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">CNIC</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" placeholder="CNIC" id="input6" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Message</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="6" id="input5" placeholder="Enter Your Email" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" onclick="Send()" id="send" class="btn btn-primary">Send</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- header-start -->
+    <header>   
+         <div class="menu-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 col-sm-6 col-xs-6">
+                        <div class="logo">
+                            <a href="@Url.Action("Index","Home")"><img src="@Url.Content("~/Content/Template/")img/logo.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-sm-6 hidden-sm hidden-xs">
+                        <div class="menu">
+                            <nav>
+                                <ul style="font-family: 'Dancing Script', cursive;">
+                                    <li>
+                                        <a href="@Url.Action("Index","Home")" id="HomePage">Home</a>
+
+                                    </li>
+                                    <li><a href="@Url.Action("Restaurants","Home")" id="Restaurants">Restaurants</a></li>
+                                    <li><a href="@Url.Action("Careers","Home")" id="Careers">Careers</a></li>
+                                    <li><a href="@Url.Action("Contests","Home")" id="Contest">Contests</a></li>
+                                    <li><a href="@Url.Action("Events","Home")" id="Event">Events</a></li>
+                                    <li><a href="@Url.Action("Gallery","Home")" id="Gallery">Gallery</a></li>
+
+                                    <li><a href="@Url.Action("AboutUs","Home")" id="About_Us">About Us</a></li>
+                                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
+
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="container" style="margin-top:10px; ">
+
+
+
+
+            </div>
+        </div>
+
+        <nav>
+            <div class="mobile-menu-area visible-xs visible-sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mobile_menu">
+                                <nav id="mobile_menu_active">
+                                    <ul>
+                                        <li><a href="@Url.Action("Index","Home")" id="HomePage">Home</a></li>                                   </li>
+                                        <li><a href="@Url.Action("Restaurants","Home")" id="Restaurants">Restaurants</a></li>
+                                        <li><a href="@Url.Action("Careers","Home")" id="Careers">Careers</a></li>
+                                        <li><a href="@Url.Action("Contests","Home")" id="Contest">Contests</a></li>
+                                        <li><a href="@Url.Action("Events","Home")" id="Event">Events</a></li>
+                                        <li><a href="@Url.Action("Gallery","Home")" id="Gallery">Gallery</a></li>
+
+                                        <li><a href="@Url.Action("AboutUs","Home")" id="About_Us">About Us</a></li>
+                                        <li>@Html.ActionLink("Login", "Login", "Account")"</li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" style="padding-top:10px;">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <div class="container">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner row">
+                        <div class="item active col-lg-12">
+                            <img style="width:100%; min-height:150px;  max-height:150px;" src="~/Content/Images/Ads/1.jpg" alt="Los Angeles">
+                        </div>
+                        @{
+                            foreach (var item in ViewBag.upperCarousel)
+                            {
+                                if (item != null)
+                                {
+                                    <div class="item col-lg-12">
+                                        <img style="width:100%; min-height:150px;  max-height:150px;" src="~/Content/Images/Ads/@item.Trim()" alt="Los Angeles">
+                                    </div>
+
+                                }
+                            }
+                        }
+
+                    </div>
+                </div>
+                <!-- Left and right controls -->
+
+
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="margin-left:15px;">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next" style="margin-right:15px;">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </nav>
+
+
+        @*<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+            <div class="container-fluid">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="container">
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner row">
+
+                            <div class="item active col-lg-12">
+                                <img style="width:100%; min-height:200px;  max-height:200px;" src="http://frugalfinders.com/wp-content/uploads/2016/02/California-Pizza-Kitchen-Valentines-Day-Deal.jpg" alt="Los Angeles">
+                            </div>
+
+                            <div class="item col-md-12">
+                                <img style="width:100%; min-height:200px;  max-height:200px;" src="http://frugalfinders.com/wp-content/uploads/2016/02/California-Pizza-Kitchen-Valentines-Day-Deal.jpg" alt="Chicago">
+                            </div>
+
+                            <div class="item  col-md-12">
+                                <img style="width:100%; min-height:200px;  max-height:200px;" src="https://i1.wp.com/utahdealdiva.com/wp-content/uploads/2016/08/2016-08-16_13-21-36.jpg?fit=300%2C194" alt="New York">
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                </div>
+                </nav>*@
+    </header>
+    <!-- header-end -->
+
+
+    <div>
+        @RenderBody()
+    </div>
+
+
+    <!-- footer-start -->
+    <footer>
+        <div class="footer-top-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12" >
+                        <div class="single-footer-item footer-item-work-time">
+                            <h4 class="footer-title">Description</h4>
+                            <p style="color:#898989">Ut enim ad minim veniam, quis nostrud at exercitation ullamco laboris nisi nemo sit enim ipsam voluptatem quia voluptas</p>
+                            <ul class="footer-social">
+                                <li><a href="https://www.facebook.com/groups/656840137800041/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://mail.google.com" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="https://www.facebook.com/groups/656840137800041/" target="_blank"><i class="fa fa-twitter"></i></a></li>                              
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="single-footer-item footer-item-work-time">
+                            <h4 class="footer-title">Work time</h4>
+                            <ul class="work-time-list">
+                                <li>Monday - Friday <span class="wtl-time">09:00 - 23:00</span></li>
+                                <li>Saturday <span class="wtl-time">11:00 - 01:00</span></li>
+                                <li>Sunday <span class="wtl-time">12:00 - 23:00</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="single-footer-item footer-item-contact-us">
+                            <h4 class="footer-title">Contact Us</h4>
+                            <ul class="contact-address-list">
+                                <li>150 Duffy Ave, Hicksville, NY 11801, USA</li>
+                                <li>+38 056 23 15 7851</li>
+                                <li>Slice.info@mail.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="single-footer-item footer-item-subscribe">
+                            <h4 class="footer-title">Email Us For More Info</h4>
+                            <div class="footer-subscribe-form-area">
+                                <form action="#">
+                                    <div class="fsfa-input">
+
+                                        <input class="btn btn-default" style="padding:10px 40px;" type="button" value="Email" data-toggle="modal" data-target="#modal">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="footer-bottom">
+                             <p>&copy; @DateTime.Now.Year - Designed By RootPointers&hearts;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer-end -->
+
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "Coming_Soon";
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+
+<style>
+    .form-group input[type="checkbox"] {
+        display: none;
+    }
+
+        .form-group input[type="checkbox"] + .btn-group > label span {
+            width: 20px;
+        }
+
+            .form-group input[type="checkbox"] + .btn-group > label span:first-child {
+                display: none;
+            }
+
+            .form-group input[type="checkbox"] + .btn-group > label span:last-child {
+                display: inline-block;
+            }
+
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+            display: inline-block;
+        }
+
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+            display: none;
+        }
+    </style>
+
+
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:57732/api/restaurants/GetAllRestaurantsById?id=" + @ViewBag.Id + "", //URI
+            dataType: "json",
+            success: function (data) {
+                debugger;
+                var datavalue = data;
+                alert("idr a gya");
+                var myJsonObject = datavalue;
+                contentType: "application/json";
+                $.each(myJsonObject, function (i, mobj) {
+                    document.getElementById("name").innerHTML = mobj.Name;
+                    document.getElementById("discount").innerHTML = mobj.Discount;
+
+                });
+
+            },
+            error: function (xhr) {
+                bootbox.alert('Internel Error...');
+            }
+        });
+
+
+        var id = 0;
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:57732/api/tags/GetAllTags?id=" + id + "", //URI
+            dataType: "json",
+            success: function (data) {
+                debugger;
+                var datavalue = data;
+                var myJsonObject = datavalue;
+                contentType: "application/json";
+                $.each(myJsonObject, function (i, mobj) {
+                
+
+
+
+                    $("#checkboxes").append('<option>'+mobj.Description+'</option>');
+
+
+                });
+
+            },
+            error: function (xhr) {
+                bootbox.alert('Internel Error...');
+            }
+        });
+    });
+</script>
+
+
+
+<!-- book-table-area-start -->
+<div class="book-area our-chef-book bg-with-black" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                <div class="book-area-head">
+                    <div class="home-one-hero-content">
+                        <h1 class="st-ds" id="name"></h1>
+                        <h2 id="discount"></h2>
+                        
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="[ row ]">
+                        <h2>Fancy Bootstrap Checkboxes that work with <a href="https://bootswatch.com/" target="_blank">Bootswatch</a></h2>
+                        <p>My latest project needed some checkboxes that worked very nicely with bootswatch. Use the Theme picker above here to check out what the checkboxes look like in the different themes.</p>
+                    </div>
+                    <div class="[ col-xs-12 col-sm-6 ]">
+                        <h3 id="checkboxes">Standard Checkboxes</h3>
+                        <div class="sah-show">
+                            <label>SHOW:</label>
+                            <select id="checkboxes">
+                                
+                            </select>
+                        </div>
+                        
+                        
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- book-table-area-end -->

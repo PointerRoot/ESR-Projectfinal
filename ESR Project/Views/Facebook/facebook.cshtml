@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "facebook";
+}
+
+<h2>facebook</h2>
+
+<html>
+<head>
+    <link rel="stylesheet" href="../../Content/facebook.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/style.css" />
+    <!-- Css for reaction system -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/reaction.css" />
+
+    <script type="text/javascript" src="~/Content/js/jquery.min.js"></script>
+    <!-- jQuery for Reaction system -->
+    <script type="text/javascript" src="~/Content/js/reaction.js"></script>
+    <script type="text/javascript">
+    </script>
+
+
+
+
+
+
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () {
+            // init the FB JS SDK
+            FB.init({
+                appId: '1505036122923009',
+                cookie: true, // enable cookies to allow the server to access
+                // the session
+                xfbml: true, // parse social plugins on this page
+                version: 'v2.10'                                // Enable oauth authentication
+            });
+
+            // Additional initialization code such as adding Event Listeners goes here
+
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    console.log(response.authResponse.accessToken);
+
+
+                    /* SHARE STYLE POST TO WALL - START */
+                    // var opts = {
+                    // 	message : 'Post message',
+                    // 	name : 'Test post to wall',
+                    // 	link : 'http://jonmosley.co.uk',
+                    // 	description : 'Description here',
+                    // 	picture : 'http://static.dezeen.com/uploads/2013/03/dezeen_Sergio-concept-car-by-Pininfarina_ss_4.jpg'
+                    // };
+                    // FB.api('/me/feed', 'post', opts, function(response)
+                    // {
+                    // 	if (!response || response.error)
+                    // 	{
+                    // 		console.log(response.error);
+                    // 		alert('Posting error occured');
+                    // 	}else{
+                    // 		alert('Success - Post ID: ' + response.id);
+                    // 	}
+                    // });
+                    /* SHARE STYLE POST TO WALL - END */
+
+
+                    /* LARGE PHOTO STYLE POST TO WALL - START */
+                    var opts = {
+                        message: 'Photo upload',
+                        access_token: response.authResponse.accessToken,
+                        url:  'http://static.dezeen.com/uploads/2013/03/dezeen_Sergio-concept-car-by-Pininfarina_ss_4.jpg'
+                    };
+
+                    FB.api('/1740645516193752/feed', 'post', opts, function (response) {
+                        if (!response || response.error) {
+                            console.log(response.error);
+                            alert('Posting error occured');
+                        } else {
+                            alert('Success - Post ID: ' + response.id);
+                        }
+                    });
+                    /* LARGE PHOTO STYLE POST TO WALL - END */
+
+                } else {
+                    alert('Not logged in');
+                }
+            }, { scope: 'publish_actions, user_photos' });
+
+        };
+
+        // Load the SDK asynchronously
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
+
+
+</body>
+
+
+    
+</html>
+

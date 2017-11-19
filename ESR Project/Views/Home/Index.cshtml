@@ -1,0 +1,312 @@
+﻿
+@{
+    ViewBag.Title = "HomePage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*<div id="fb-root"></div>
+    <script>
+    (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1505036122923009";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>*@
+
+<!--sign in modal-->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Login/Registration - <a href="http://www.jquery2dotnet.com">jquery2dotnet.com</a>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#Login" data-toggle="tab">Login</a></li>
+                            <li><a href="#Registration" data-toggle="tab">Registration</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Login">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-2 control-label">
+                                            Email
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" id="email1" placeholder="Email" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1" class="col-sm-2 control-label">
+                                            Password
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                Submit
+                                            </button>
+                                            <a href="javascript:;">Forgot your password?</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="Registration">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-2 control-label">
+                                            Name
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <select class="form-control">
+                                                        <option>Mr.</option>
+                                                        <option>Ms.</option>
+                                                        <option>Mrs.</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" placeholder="Name" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-2 control-label">
+                                            Email
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" id="email" placeholder="Email" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mobile" class="col-sm-2 control-label">
+                                            Mobile
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" id="mobile" placeholder="Mobile" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="col-sm-2 control-label">
+                                            Password
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control" id="password" placeholder="Password" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <button type="button" class="btn btn-primary btn-sm">
+                                                Save & Continue
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="OR" class="hidden-xs">
+                            OR
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--sign in modal end-->
+
+<section">
+    <div class="row">
+        <!-- The carousel -->
+        <div id="transition-timer-carousel" class="carousel slide transition-timer-carousel" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#transition-timer-carousel" data-slide-to="0" class="active"></li>
+                @{
+                    foreach (var item in ViewBag.details)
+                    {
+                        <li data-target="#transition-timer-carousel" data-slide-to="1"></li>
+
+                    }
+                }
+
+
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="../../Content/Images/food.jpg" style="width:1500px;height:600px;" />
+                    <div class="hero">
+                        <hgroup>
+                            <h1>We are creative</h1>
+                            <h3>Get start your next awesome project</h3>
+                        </hgroup>
+
+                    </div>
+                </div>
+                @{
+                    var i = 0;
+                    foreach (var item in ViewBag.details)
+                    {
+                        if (i == 3)
+                        {
+                            i = 0;
+                        }
+                        if (i == 0)
+                        {
+                            <div class="item">
+                                <img src="~/Content/Images/Slider/1.jpg" style="width:1500px;height:600px;" />
+
+                                <div class="hero">
+                                    <hgroup>
+                                        <h1>@item.Name</h1>
+                                        <h1>@item.Discount</h1>
+                                        <h2>@item.Area</h2>
+                                    </hgroup>
+
+                                </div>
+
+                            </div>
+                        }
+                        else if (i == 1)
+                        {
+                            <div class="item">
+                                <img src="~/Content/Images/Slider/2.jpg" style="width:1500px;height:600px;" />
+
+                                <div class="hero">
+                                    <hgroup>
+                                        <h1>@item.Name</h1>
+                                        <h1>@item.Discount</h1>
+                                        <h2>@item.Area</h2>
+                                    </hgroup>
+
+                                </div>
+
+                            </div>
+                        }
+                        else
+                            if (i == 2)
+                        {
+                            <div class="item">
+                                <img src="~/Content/Images/Slider/3.jpg" style="width:1500px;height:600px;" />
+
+                                <div class="hero">
+                                    <hgroup>
+                                        <h1>@item.Name</h1>
+                                        <h1>@item.Discount</h1>
+                                        <h2>@item.Area</h2>
+                                    </hgroup>
+
+                                </div>
+
+                            </div>
+                        }
+                        i++;
+
+                    }
+                }
+
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#transition-timer-carousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#transition-timer-carousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+
+            <!-- Timer "progress bar" -->
+            <hr class="transition-timer-carousel-progress-bar animate" />
+        </div>
+    </div>
+    
+    <!-- home3-about-health-area-start -->
+    <div class="home3-about-health-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div class="home3-about-health">
+                        <h2 class="h3-ah-intro st-ds" id="facebook">These helps us</h2>
+                        <h3 class="h3-ah-title">Our Store</h3>
+                        <div class="h3-ah-contents">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-h3-ah-content">
+                                        <a href="#"><img src="~/Content/Images/food.jpg" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="single-h3-ah-content">
+                                        <a href="#"><img src="~/Content/Images/food.jpg" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="home3-about-health-right">
+                        <h4 class="h3-ahr-intro">ABOUT US</h4>
+                        <h2 class="h3-ahr-title">EVERY COOKING TIME A SPECIAL DAY</h2>
+                        <p class="h3-ahr-text">Rica is a restaurant, bar and coffee roastery located on a busy corner site in Farringdon’s Exmouth Market. With glazed frontage on two sides of the building, overlooking the market and a bustling London intersection. </p>
+                        <a class="h3-ahr-details" href="#">DETAILS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- home3-about-health-area-end -->
+    <script>     
+
+        //  $(document).ready(function () {
+        //Events that reset and restart the timer animation when the slides change
+        $("#transition-timer-carousel").on("slide.bs.carousel", function (event) {
+            //The animate class gets removed so that it jumps straight back to 0%
+            $(".transition-timer-carousel-progress-bar", this)
+                .removeClass("animate").css("width", "0%");
+        }).on("slid.bs.carousel", function (event) {
+            //The slide transition finished, so re-add the animate class so that
+            //the timer bar takes time to fill up
+            $(".transition-timer-carousel-progress-bar", this)
+                .addClass("animate").css("width", "100%");
+        });
+
+        //Kick off the initial slide animation when the document is ready
+        $(".transition-timer-carousel-progress-bar", "#transition-timer-carousel")
+            .css("width", "100%");
+       // });
+    </script>
+
+    <div>      
+
+        @Html.Partial("FacebookFeed")
+    
+    </div>
+

@@ -1,0 +1,330 @@
+﻿
+@model Tuple<ESR_Project.Models.SocialMedia.SocialMedia.Pictures, ESR_Project.Models.SocialMedia.SocialMedia.posts>
+
+
+
+
+
+<html>
+<head>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 pull-right">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        @{
+                            foreach (var item in ViewBag.lowerCarousel)
+                            {
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+
+                            }
+                        }
+                    </ol>
+                    <div class="container">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner row">
+                            <div class="item active">
+                                <img style="width:100%; min-height:300px;  max-height:300px;" src="~/Content/Images/Ads/1.jpg" alt="Los Angeles">
+                            </div>
+                            @{
+                                foreach (var item in ViewBag.lowerCarousel)
+                                {
+                                    if (item != null)
+                                    {
+                                        <div class="item">
+                                            <img style="width:100%; min-height:300px;  max-height:300px;" src="~/Content/Images/Ads/@item.Trim()" alt="Los Angeles">
+                                        </div>
+                                    }
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="margin-left:15px;">
+
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next" style="margin-right:15px;">
+                        n>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div class="container pull-left" style="padding-top:100px;">
+                    @{int j = 0; }
+                    @foreach (var post in Model.Item2.feed.data)
+                    {
+                        <div class="box image">
+                            <div class="box-header">
+                                <h3 id="profile">
+                                    @{
+                                        var from = post.From.name;
+                                    }
+                                    <a href=""><img src="@Model.Item1.picture.ElementAt(j)" alt="" />@from</a>
+                                    <span><br>@post.created_time</span>
+                                </h3>
+                                <span><i class="fa fa-angle-down"></i></span>
+                                <div class="window"><span></span></div>
+                            </div>
+                            <div class="box-content">
+                                <div class="content">
+                                    @if (post.attachments != null)
+                                    {
+
+                                        if (post.attachments.data != null)
+                                        {
+                                            foreach (var attachment in post.attachments.data)
+                                            {
+                                                if (attachment.media != null)
+                                                {
+                                                    if (attachment.target != null)
+                                                    {
+                                                        <a href="@attachment.target.url"> <p><img src=" @attachment.media.image.src" /></p></a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p><img src=" @attachment.media.image.src" /></p>
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                </div>
+                                <div class="bottom">
+                                    <p>@post.message</p>
+                                    <span><span class="fa fa-search-plus"></span></span>
+                                </div>
+                            </div>
+
+                            <div class="box-likes">
+                                <div class="row">
+                                    @{
+                                        if (post.likes != null)
+                                        {
+                                            if (post.likes.data.Length > 4)
+                                            {
+                                                <span>
+                                                    <a href="#">
+
+                                                        @if (post.likes != null)
+                                                        {<text><img src=" @post.likes.data[0].pic" /></text> }
+                                                        else
+                                                        { <text>no likes</text> }
+                                                    </a>
+                                                </span>
+                                                <span>
+                                                    <a href="#">
+                                                        @if (post.likes != null)
+                                                        {<text><img src=" @post.likes.data[1].pic" /></text> }
+                                                        else
+                                                        { <text>no likes</text> }
+                                                    </a>
+                                                </span>
+                                                <span>
+                                                    <a href="#">
+                                                        @if (post.likes != null)
+                                                        {<text><img src=" @post.likes.data[2].pic" /></text> }
+                                                        else
+                                                        { <text>no likes</text> }
+                                                    </a>
+                                                </span>
+                                                    <span><a href="#">@(post.likes.data.Length - 3) Likes</a></span>
+                                                    <span></span>
+                                            }
+                                            else
+                                            {
+                                                if (post.likes.data.Length == 0)
+                                                {
+                                                    <text>
+                                                        <span>
+                                                            <a href="#">0 Likes </a>
+                                                        </span>
+                                                    </text>
+
+                                                }
+                                                for (int i = 0; i < post.likes.data.Length; i++)
+                                                {
+
+                                                    <text>
+                                                        <span>
+                                                            <a href="#"><img src=" @post.likes.data[i].pic" /> </a>
+                                                        </span>
+                                                    </text>
+
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                </div>
+                                @*@if (post.likes.data != null)
+                                    {
+                                    <div class="row">
+                                        <span>>@post.likes.data.Length</span>
+                                    </div>
+                                    }*@
+                            </div>
+
+                            <div class="box-buttons">
+                                <div class="row">
+                                    <button>
+                                        <span class="like-btn">
+                                            <!-- Default like button -->
+                                            <span class="fa like-btn-emo fa-thumbs-o-up"></span> <!-- Default like button emotion-->
+                                            <span class="like-btn-text">Like</span> <!-- Default like button text,(Like, wow, sad..) default:Like  -->
+                                            <ul class="reactions-box">
+                                                <!-- Reaction buttons container-->
+                                                <li class="reaction reaction-like" data-reaction="Like"></li>
+                                                <li class="reaction reaction-love" data-reaction="Love"></li>
+                                                <li class="reaction reaction-haha" data-reaction="HaHa"></li>
+                                                <li class="reaction reaction-wow" data-reaction="Wow"></li>
+                                                <li class="reaction reaction-sad" data-reaction="Sad"></li>
+                                                <li class="reaction reaction-angry" data-reaction="Angry"></li>
+                                            </ul>
+                                        </span>
+                                        <div class="like-stat">
+                                            <!-- Like statistic container-->
+                                            <span class="like-emo">
+                                                <!-- like emotions container -->
+                                                <span class="like-btn-like"></span> <!-- given emotions like, wow, sad (default:Like) -->
+                                            </span> <span class="like-details">Dhaval Rana and 1k others</span>
+                                        </div>
+                                    </button>
+                                    <button><span class="fa fa-comments" aria-hidden="true"></span></button>
+                                    <button><span class="fa fa-share" aria-hidden="true"></span></button>
+                                </div>
+                            </div>
+                            <div class="box-click">
+                                <span>
+                                    <a onclick="comment()">
+                                        <i class="ion-chatbox-working"></i>
+                                        @if (post.comments != null)
+                                        {@post.comments.count  }
+                                        else
+                                        {
+                                            <text>0</text>
+                                        }
+
+
+                                        comments
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="box-comments">
+                                @if (post.comments != null)
+                                {
+                                    if (post.comments.data != null)
+                                    {
+                                        int k = 0;
+                                        foreach (var comment in post.comments.data)
+                                        {
+                                            <div class="comment">
+                                                <img src="@Model.Item1.comments_pictures.ElementAt(k)" alt="" />
+                                                <div class="content">
+                                                    <h3><a href="">@comment.from.name</a><span><time>@comment.created_time</time><a href="#">Like</a></span></h3>
+                                                    <p>@comment.message</p>
+                                                </div>
+                                            </div>
+                                            k++;
+                                        }
+                                    }
+                                }
+                            </div>
+                            <div class="box-new-comment">
+                                <img src="https://goo.gl/oOD0V2" alt="" />
+                                <div class="content">
+                                    <div class="row">
+                                        <textarea placeholder="write a comment..."></textarea>
+                                        <button class="btn-default" id="button"> submit</button>
+
+                                    </div>
+                                    <div class="row">
+                                        <span class="ion-android-attach"></span>
+                                        <span class="fa fa-smile-o"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         j++;
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="panel-group">
+            @foreach (var post in Model.Item2.feed.data)
+            {
+                <div class="panel-heading">@post.created_time - @post.story</div>
+                <div class="panel-body">
+                    @if (!string.IsNullOrEmpty(@post.message))
+                    {
+                    <p>@post.message</p>
+                    }
+
+                    @if (post.attachments != null)
+                    {
+                        if (post.attachments.data != null)
+                        {
+                            foreach (var attachment in post.attachments.data)
+                            {
+                                if (attachment.media != null)
+                                {
+                                    if (attachment.target != null)
+                                    {
+                                       <a href="@attachment.target.url"> <p><img src=" @attachment.media.image.src" width="450" /></p></a>
+                                    }
+                                    else
+                                    {
+                                        <p><img src=" @attachment.media.image.src" width="450" /></p>
+                                    }
+
+                                }
+
+                            }
+                        }
+                    }
+                </div>
+                <div class="panel-footer">
+                    @if (post.likes != null)
+                    {
+                        if (post.likes.data != null)
+                        {
+                            <p>Likes-@post.likes.data.Length</p>
+                        }
+                    }
+
+                    @if (post.comments != null)
+                    {
+                        if (post.comments.data != null)
+                        {
+
+                            <ul>
+                                @foreach (var comment in post.comments.data)
+                                {
+                                    <li>@comment.message</li>
+                                }
+                            </ul>
+                        }
+                    }
+
+                </div>
+            }
+
+        </div>*@
+
+
+
+    <script type="text/javascript">
+        $("#button").click(function () {
+            alert("Handler for .click() called.");
+
+        });
+    </script>
+</body>
+
+</html>

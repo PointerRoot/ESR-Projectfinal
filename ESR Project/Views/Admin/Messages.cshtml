@@ -1,0 +1,147 @@
+﻿
+
+<script>
+    function Message(id) {
+        document.getElementById("bleh").value = id;
+
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:57732/api/events/GetAllMails?id=" + id + "", //URI
+            dataType: "json",
+            success: function (data) {
+                debugger;
+                var datavalue = data;
+                var myJsonObject = datavalue;
+                contentType: "application/json";
+                $.each(myJsonObject, function (i, mobj) {
+                    if (id == '1') {
+                        document.getElementById('Subject1').value = mobj.Subject;
+                        document.getElementById('compose-textarea').innerHTML = mobj.Body;
+                    }
+                    else if (id == '2') {
+                        document.getElementById('Subject1').value = mobj.Subject;
+                        document.getElementById('compose-textarea').innerHTML = mobj.Body;
+                    }
+                    else if (id == '3') {
+                        document.getElementById('Subject1').value = mobj.Subject;
+                        document.getElementById('compose-textarea').innerHTML = mobj.Body;
+                    }
+
+
+                    
+                });
+
+            },
+            error: function (xhr) {
+                bootbox.alert('Internel Error...');
+            }
+        });
+        
+        
+    }
+
+        function Send(id) {
+            alert(id);
+           
+            if ($("#compose-textarea").val() != null && $("#Emails").val() != null) {
+                var data = new FormData();
+                document.getElementById("sendbtn").disabled = true;
+                data.append("Emails", $("#Emails").val());
+                data.append("Message", $("#compose-textarea").val());
+                data.append("Subject", $("#Subject1").val());
+                data.append("Id", $("#bleh").val());
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:57732/api/events/PostMail?id=" + id + "", //URI
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (data, textStatus, xhr) {
+                        if (data == "true") {
+                            alert('Message Saved Successfully!');
+                            document.getElementById("sendbtn").disabled = false;
+                           document.getElementById("Emails").value = "";
+                           document.getElementById("Subject").value = "";
+                            $("#compose-textarea").val("");
+                          
+                            
+                            alert("haha");
+                           
+                        }
+                        else {
+                            alert('Something went wrong. try again Later');
+                            document.getElementById("sendbtn").disabled = false;
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                       alert('Server is not responding! Try Again Later');
+                        document.getElementById("sendbtn").disabled = false;
+                    }
+                });
+
+
+            }
+            else {
+               alert("Feilds are empty");
+
+            }
+        }
+  
+</script>
+<div class="content-wrapper" style="min-height:900px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Mailbox
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#" onclick="myFunctionSwapView('first_Home_Page')"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Mailbox</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+
+
+            <div class="col-md-9" id="Compose">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Compose New Message</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="form-group">
+                            <input class="form-control" placeholder="To:" id="Emails" />
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Subject:" id="Subject1" />
+                        </div>
+                        <div class="form-group">
+                            <textarea id="compose-textarea" class="form-control" style="height: 300px"></textarea>
+                            <input id="bleh" hidden> 
+                        </div>
+                        <!--         <div class="form-group">
+                                      <div class="btn btn-default btn-file">
+                                          <i class="fa fa-paperclip"></i> Attachment
+                                          <input type="file" name="attachment" />
+                                      </div>
+                                      <p class="help-block">Max. 32MB</p>
+                                  </div> -->
+                    </div><!-- /.box-body -->
+
+                </div><!-- /. box -->
+            </div><!-- /.col -->
+            <div class="box-footer">
+                
+                    
+                    <button type="button" id="sendbtn" class="btn btn-primary" onclick="Send(document.getElementById('bleh').value)"><i class="fa fa-envelope-o"></i> Save</button>
+               
+               
+            </div><!-- /.box-footer -->
+        </div><!-- /. box -->
+
+        
+    </section>
+</div>

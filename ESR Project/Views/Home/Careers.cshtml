@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Careers";
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+
+<script>
+        $(document).ready(function () {
+
+
+
+            var id = 0;
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:57732/api/careers/GetAllCareers?id="+ id+"", //URI
+                dataType: "json",
+                success: function (data) {
+                    debugger;
+                    var datavalue = data;
+                    var myJsonObject = datavalue;
+                    contentType: "application/json";
+                    $.each(myJsonObject, function (i, mobj) {
+                     
+
+
+
+                        $("#careers").append(' <div class="col-md-4 col-sm-6 col-xs-12">'+
+                                                         ' <div class="h4-single-signature-dishes">'+
+                                                         '<div class="h4-ssd-img">'+
+                                                        ' <img src="@Url.Content("~/Content/Template/")img/home3-signature-dishes/dish1.jpg" alt="">'+
+                                                       '   </div>'+
+                                                       '<div class="h4-ssd-content">'+
+                            '<h4 class="h4-ssd-content-title">' + mobj.PositionTitle + '</h4>' +
+                            '<h5 class="h5-ssd-content-title">' + mobj.Responsibilities + '</h5>' +
+                            ' <p class="h4-ssd-content-text">' + mobj.Requirments+'</p>'+
+                        '<a class="h4-ssd-content-view" href="#">Apply</a>'+
+                    '</div>'+
+                '</div>'+
+            '</div>');
+
+
+                    });
+
+                },
+                error: function (xhr) {
+                    bootbox.alert('Internel Error...');
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+<!-- h4-signature-dishes-area-start -->
+<div class="h4-signature-dishes-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="h4-signature-dishes-head">
+                    <h2 class="h4-sdh-title st-ds">Signature Dishes</h2>
+                    <h4 class="h4-sdh-title2">SPECIAL OFER</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="careers">
+            
+        </div>
+    </div>
+</div>
+<!-- h4-signature-dishes-area-end -->
+

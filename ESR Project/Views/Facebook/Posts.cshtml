@@ -1,0 +1,567 @@
+﻿
+@model Tuple<ESR_Project.Models.SocialMedia.SocialMedia.Pictures, ESR_Project.Models.SocialMedia.SocialMedia.posts>
+
+
+
+
+
+<html>
+<head>
+    <link rel="stylesheet" href="../../Content/facebook.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/style.css" />
+    <!-- Css for reaction system -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/reaction.css" />
+
+    <script type="text/javascript" src="~/Content/js/jquery.min.js"></script>
+    <!-- jQuery for Reaction system -->
+    <script type="text/javascript" src="~/Content/js/reaction.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    
+   
+
+
+
+</head>
+<body>
+    <div id="fb-root"></div>
+    
+    
+
+    <div class="container">
+      <span>  <fb:login-button scope="public_profile,email,user_groups,publish_actions,photo_upload,publish_stream" onlogin="checkLoginState();"></fb:login-button></span>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                
+                <hr>
+                <form action="#" method="post" role="form" enctype="multipart/form-data" class="facebook-share-box">
+                    <ul class="post-types">
+                        
+                    </ul>
+                    <div class="share">
+                        <div class="arrow"></div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" ><i class="fa fa-file"></i> Update Status</div>
+                            <div class="panel-body">
+                                <div class="">
+                                    <textarea id="message" name="message" cols="40" rows="10" id="status_message" class="form-control message" style="height: 62px; overflow: hidden;" placeholder="What's on your mind ?"></textarea>
+                                     <textarea id="link" value="" placeholder="type your link here" cols="20" rows="20" class="form-control message" style="height:30px; overflow:hidden;" ></textarea>
+                                </div>
+
+                            </div>
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="form-group">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default"><i class="icon icon-map-marker"></i> Location</button>
+                                                <button type="button" class="btn btn-default"><i class="icon icon-picture"></i> Photo</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <select name="privacy" class="form-control privacy-dropdown pull-left input-sm">
+                                                <option value="1" selected="selected">Public</option>
+                                                <option value="2">Only my friends</option>
+                                                <option value="3">Only me</option>
+                                            </select>
+                                            <input type="submit" name="submit" value="Post" class="btn btn-primary"  onclick="postToSelectedGroups();">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+            </form>
+        </div>
+    </div>
+    </div> 
+
+    
+
+
+
+    
+    //status section ended
+
+   
+
+        
+        
+
+    <script>
+
+
+       
+    
+
+
+        function checkLoginState() {
+                FB.getLoginStatus(function (response) {
+                    statusChangeCallback(response);
+                });
+            }
+        // This function is called when someone finishes with the Login
+        // Button.  See the onlogin handler attached to it in the sample
+        // code below.
+        function checkLoginState() {
+                FB.getLoginStatus(function (response) {
+                    statusChangeCallback(response);
+                });
+            }
+
+        window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '1663612090380234',
+                    cookie: true, // enable cookies to allow the server to access
+                    // the session
+                    xfbml: true, // parse social plugins on this page
+                    version: 'v2.10' // use version 2.1
+                });
+
+            // Now that we've initialized the JavaScript SDK, we call
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+
+        };
+
+        // Load the SDK asynchronously
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        // Here we run a very simple test of the Graph API after login is
+        // successful.  See statusChangeCallback() for when this call is made.
+        function testAPI() {
+                console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function (response) {
+                console.log('Successful login for: ' + response.name);
+            document.getElementById('status').innerHTML =
+                    'Thanks for logging in, ' + response.name + '!';
+            });
+        }
+
+        // This function reads your Facebook groups.
+        function getMyGroups() {
+                FB.api('/me/groups', function (response) {
+                    var groupList = document.getElementById('groups');
+                    response.data.forEach(function (group) {
+                        var opt = document.createElement("option");
+                        opt.value = group.id;
+                        opt.innerHTML = group.name;
+                        groupList.appendChild(opt);
+                    });
+                }, {
+                        scope: 'user_groups,publish_actions'
+                    });
+            }
+
+        function postToSelectedGroups() {
+
+
+
+
+            function postOrFinish() {
+                var picture = $('#picture').val();
+               // alert(picture);
+
+                    //var message = document.getElementById("message").value;
+                    //var link = document.getElementById("link").value;
+                    //FB.api(
+                    //    "/1740645516193752/feed",
+                    //    "POST", {
+                    //        "message": message,
+                    //        "link": link
+                           
+                    //    }, {
+                    //        scope: 'user_groups,publish_actions'
+                    //    },
+                    //    function (response) {
+                    //        if (response.error) {
+                    //            console.log(response.error);
+                    //        }
+                    //        setTimeout(postOrFinish, delay * 1000);
+                    //    });
+
+                var imgURL = "http://farm4.staticflickr.com/3332/3451193407_b7f047f4b4_o.jpg";//change with your external photo url
+                FB.api('/1740645516193752_1957183321206636/comment', 'post', {
+                    url: 'https://www.google.com.pk/search?q=pictures&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiw6oyd98DWAhWLp48KHbnDB6oQ_AUICigB&biw=1366&bih=613#imgdii=L5_G5D26RxSS1M:&imgrc=s5yQ7e7rxgoKkM:',
+                    message: 'Upload demo'
+                }, {
+                        scope: 'user_groups,publish_actions'
+                    }, function (response) {
+                    if (response && response.id)
+                        console.log('Photo uploaded', response.id);
+                });
+
+                    alert('All done!');
+
+                }
+
+            postOrFinish();
+
+        }
+
+        function uploadPhoto() {
+            FB.api('/me/photos', 'post', { source: 'https://scontent-mxp1-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/12107039_1513771898920585_3618649571988879636_n.jpg?oh=cef4dad7d2e036aa8eb48f42d51e7406&oe=56D8EC6A' }, function (response) {
+                if (!response || response.error) {
+                    document.getElementById('status').innerHTML = "Error!";
+                } else {
+                    document.getElementById('status').innerHTML = response.id;
+                }
+            });
+        }
+
+
+    </script>
+
+    <section>
+        <
+        <div class="container">
+
+
+            @{int j = 0; }
+
+            @foreach (var post in Model.Item2.feed.data)
+            {
+                <div class="box image">
+                    <div class="box-header">
+                        <h3 id="profile">
+                            @{
+                                var from = post.From.name;
+
+
+                            }
+
+                            <a href=""><img src="@Model.Item1.picture.ElementAt(j)" alt="" />@Model.Item2.name</a>
+                            <span><br>@post.created_time</span>
+                        </h3>
+                        <span><i class="fa fa-angle-down"></i></span>
+                        <div class="window"><span></span></div>
+                    </div>
+                    <div class="box-content">
+                        <div class="content">
+                            @if (post.attachments != null)
+                            {
+
+                                if (post.attachments.data != null)
+                                {
+                                    foreach (var attachment in post.attachments.data)
+                                    {
+                                        if (attachment.media != null)
+                                        {
+                                            if (attachment.target != null)
+                                            {
+                                                <a href="@attachment.target.url"> <p><img src=" @attachment.media.image.src" /></p></a>
+                                            }
+                                            else
+                                            {
+                                                <p><img src=" @attachment.media.image.src" /></p>
+                                            }
+
+
+
+                                        }
+
+                                    }
+                                }
+                            }
+                        </div>
+                        <div class="bottom">
+                            <p>@post.message</p>
+                            <span><span class="fa fa-search-plus"></span></span>
+                        </div>
+                    </div>
+
+                    <div class="box-likes">
+                        <div class="row">
+                            @{
+                                if (post.likes != null)
+                                {
+                                    if (post.likes.data.Length > 4)
+                                    {
+                                        <span>
+                                            <a href="#">
+
+                                                @if (post.likes != null)
+                                                {<text><img src=" @post.likes.data[0].pic" /></text> }
+                                                else
+                                                { <text>no likes</text> }
+                                            </a>
+                                        </span>
+                                            <span>
+                                                <a href="#">
+                                                    @if (post.likes != null)
+                                                    {<text><img src=" @post.likes.data[1].pic" /></text> }
+                                                    else
+                                                    { <text>no likes</text> }
+                                                </a>
+                                            </span>
+                                            <span>
+                                                <a href="#">
+                                                    @if (post.likes != null)
+                                                    {<text><img src=" @post.likes.data[2].pic" /></text> }
+                                                    else
+                                                    { <text>no likes</text> }
+                                                </a>
+                                            </span>
+                                                    <span><a href="#">@(post.likes.data.Length - 3) Likes</a></span>
+                                                            <span></span>
+                                    }
+                                    else
+                                    {
+                                        if (post.likes.data.Length == 0)
+                                        {
+                                            <text>
+                                                <span>
+                                                    <a href="#">0 Likes </a>
+                                                </span>
+                                            </text>
+
+                                        }
+                                        for (int i = 0; i < post.likes.data.Length; i++)
+                                        {
+
+                                            <text>
+                                                <span>
+                                                    <a href="#"><img src=" @post.likes.data[i].pic" /> </a>
+                                                </span>
+                                            </text>
+
+                                        }
+
+                                    }
+                                }
+                            }
+                        </div>
+
+
+
+                       @*@if (post.likes.data != null)
+                            {
+                            <div class="row">
+                                <span>>@post.likes.data.Length</span>
+                            </div>
+                            }*@
+                    </div>
+
+                    <div class="box-buttons">
+                        <div class="row">
+                            <button>
+                                <span class="like-btn">
+                                    <!-- Default like button -->
+                                    <span class="fa like-btn-emo fa-thumbs-o-up"></span> <!-- Default like button emotion-->
+                                    <span class="like-btn-text">Like</span> <!-- Default like button text,(Like, wow, sad..) default:Like  -->
+                                    <ul class="reactions-box">
+                                        <!-- Reaction buttons container-->
+                                        <li class="reaction reaction-like" data-reaction="Like"></li>
+                                        <li class="reaction reaction-love" data-reaction="Love"></li>
+                                        <li class="reaction reaction-haha" data-reaction="HaHa"></li>
+                                        <li class="reaction reaction-wow" data-reaction="Wow"></li>
+                                        <li class="reaction reaction-sad" data-reaction="Sad"></li>
+                                        <li class="reaction reaction-angry" data-reaction="Angry"></li>
+                                    </ul>
+                                </span>
+                                <div class="like-stat">
+                                    <!-- Like statistic container-->
+                                    <span class="like-emo">
+                                        <!-- like emotions container -->
+                                        <span class="like-btn-like"></span> <!-- given emotions like, wow, sad (default:Like) -->
+                                    </span> <span class="like-details">Dhaval Rana and 1k others</span>
+                                </div>
+
+                                    
+
+                               
+                            </button>
+                            <button><span class="fa fa-comments" aria-hidden="true"></span></button>
+                            <button><span class="fa fa-share" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+                    
+
+
+                    <div class="box-click">
+                        <span>
+                            <a onclick="comment()">
+                                <i class="ion-chatbox-working"></i>
+                                @if (post.comments != null)
+                                {@post.comments.count  }
+                                else
+                                {
+                                    <text>0</text>
+                                }
+
+
+                                comments
+                            </a>
+                        </span>
+                    </div>
+
+
+
+                    <div class="box-comments">
+                        @if (post.comments != null)
+                        {
+                            if (post.comments.data != null)
+                            {
+                                int k = 0;
+                                foreach (var comment in post.comments.data)
+                                {
+                                    <div class="comment">
+                                        <img src="@Model.Item1.comments_pictures.ElementAt(k)" alt="" />
+                                        <div class="content">
+                                            <h3><a href="">@comment.from.name</a><span><time>@comment.created_time</time><a href="#">Like</a></span></h3>
+                                            <p>@comment.message</p>
+                                        </div>
+                                    </div>
+                                    k++;
+                                }
+
+                            }
+                        }
+                    </div>
+
+                   
+
+                    <div class="box-new-comment">
+                        <img src="https://goo.gl/oOD0V2" alt="" />
+                        <div class="content">
+                            <div class="row">
+                                <textarea placeholder="write a comment..."></textarea>
+                                <button class="btn-default" id="button"> submit</button>
+                              
+                            </div>
+                            <div class="row">
+                                <span class="ion-android-attach"></span>
+                                <span class="fa fa-smile-o"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+              
+                                    j++;
+
+                                }
+
+        </div>
+
+
+
+    </section>
+
+    
+
+
+
+
+
+  
+
+
+
+    @*<div class="panel-group">
+            @foreach (var post in Model.Item2.feed.data)
+            {
+                <div class="panel-heading">@post.created_time - @post.story</div>
+                <div class="panel-body">
+                    @if (!string.IsNullOrEmpty(@post.message))
+                    {
+                    <p>@post.message</p>
+                    }
+
+                    @if (post.attachments != null)
+                    {
+                        if (post.attachments.data != null)
+                        {
+                            foreach (var attachment in post.attachments.data)
+                            {
+                                if (attachment.media != null)
+                                {
+                                    if (attachment.target != null)
+                                    {
+                                       <a href="@attachment.target.url"> <p><img src=" @attachment.media.image.src" width="450" /></p></a>
+                                    }
+                                    else
+                                    {
+                                        <p><img src=" @attachment.media.image.src" width="450" /></p>
+                                    }
+
+                                }
+
+                            }
+
+                        }
+                    }
+
+
+                </div>
+                <div class="panel-footer">
+                    @if (post.likes != null)
+                    {
+                        if (post.likes.data != null)
+                        {
+                            <p>Likes-@post.likes.data.Length</p>
+                        }
+                    }
+
+                    @if (post.comments != null)
+                    {
+                        if (post.comments.data != null)
+                        {
+
+                            <ul>
+                                @foreach (var comment in post.comments.data)
+                                {
+                                    <li>@comment.message</li>
+                                }
+                            </ul>
+                        }
+                    }
+
+                </div>
+
+
+            }
+
+        </div>*@
+
+
+    <script type="text/javascript">
+        $("#button").click(function () {
+            alert("Handler for .click() called.");
+           
+        });
+    </script>
+</body>
+
+</html>

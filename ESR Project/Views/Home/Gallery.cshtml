@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "Gallery";
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+
+        var id = 0;
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:57732/api/events/GetAllEvents?id=" + id + "", //URI
+            dataType: "json",
+            success: function (data) {
+                debugger;
+                var datavalue = data;
+                var myJsonObject = datavalue;
+                contentType: "application/json";
+                $.each(myJsonObject, function (i, mobj) {
+
+                    $("#events").append('<div class="col-md-4 col-sm-6 col-xs-12">' +
+                        '<div class="single-event">' +
+                        '<div class="se-img">' +
+                        '<a href="#" onclick="return openGal(' + mobj.Id + ')" >' +
+                            '<img src="@Url.Content("~/Content/Template/")img/team/3.jpg" style="background-size:cover" alt="">' +
+                            '</a>'+
+                            '</div>' +
+                            '<div class="se-content">' +
+                            '<a class="sec-title" href="#">' + mobj.Name + '</a>' +
+                            '<span class="sec-date"><i class="fa fa-calendar-o"></i>' + mobj.Date + ' ' + mobj.Time + '</span>' +
+
+                            '</div>' +
+                            '</div>' +
+                            '</div>');
+
+
+                    });
+
+                },
+                error: function (xhr) {
+                    bootbox.alert('Internel Error...');
+                }
+            });
+    });
+
+    function openGal(id)
+    {
+
+         $.ajax({
+                type: "GET",
+                url: "http://localhost:57732/api/events/GetAllEventsImageById?id="+ id+"", //URI
+                dataType: "json",
+                success: function (data) {
+                    debugger;
+                    var datavalue = data;
+                    var myJsonObject = datavalue;
+                    contentType: "application/json";
+                    $.each(myJsonObject, function (i, mobj) {
+
+                        $("#gallaryshow").append(' <div class="col-md-4 col-sm-6 col-xs-12">'+
+                            '   <div class="thumbnail">' +
+                            '   <a href="@Url.Content("~/Content/Images/Events/")' + mobj.Image + '.jpg" data-fancybox="images">' +
+                            '   <img src="../../Content/Images/Events/'+mobj.Image+'.jpg" alt="">'+
+                            '   </a>'+
+                            '   </div>'+
+                            '   </div>');
+
+
+                    });
+
+                },
+                error: function (xhr) {
+                    bootbox.alert('Internel Error...');
+                }
+            });
+
+        $("#Gallerysection").show();
+        $("#event").hide();
+
+
+        return false;
+    }
+
+</script>
+
+<!-- event-area-start -->
+<div class="event-area" id="event">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="event-head">
+                    <h2 class="eh-intro st-ds">Events</h2>
+                    <h2 class="eh-title">JOIN THE EVENTS IN OUR RESTAURANT</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="events">
+
+        </div>
+    </div>
+</div>
+<!-- event-area-end -->
+<!-- dinner-experience-area-start -->
+<div class="dinner-experience-area bg-with-black" id="Gallerysection" hidden>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                <div class="dinner-experience-head">
+                    <h2 class="st-ds">Gallery</h2>
+                    <a href="../../Home/Gallery">Go Back</a>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="gallaryshow">
+
+        </div>
+    </div>
+</div>
+<!-- dinner-experience-area-end -->

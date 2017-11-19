@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "Contest";
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+<script>
+    $(document).ready(function () {
+
+
+
+        var id = 0;
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:57732/api/contests/GetLatestContests?id=" + id + "", //URI
+            dataType: "json",
+            success: function (data) {
+                debugger;
+                var datavalue = data;
+                var myJsonObject = datavalue;
+                contentType: "application/json";
+                $.each(myJsonObject, function (i, mobj) {
+
+                    $("#first").append('<div class="col-md-4 col-sm-4 col-xs-12">' +
+                        '<div class="single-team">' +
+                        '<div class="st-img">' +
+                        '<img src="@Url.Content("~/Content/Template/")img/team/12.jpg" style="background-size:cover" alt="">'+
+                   ' </div>'+
+                    '<div class="st-content">'+
+                            '<h5>' + mobj.WinnerName+'</h5>'+
+                            ' <p>' + mobj.Reward + '</p>' +
+                            ' <p>' + mobj.Date + '</p>' +
+                        '<ul>'+
+                            '<li><a href="#"><i class="fa fa-facebook"></i></a></li>'+
+                            '</ul>'+
+                    '</div>'+
+                    '</div>'+
+                    '</div>');
+
+
+                    });
+
+                },
+                error: function (xhr) {
+                    bootbox.alert('Internel Error...');
+                }
+            });
+           //adding further winners bellow
+             id = 0;
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:57732/api/contests/GetAllContests?id="+ id+"", //URI
+                dataType: "json",
+                success: function (data) {
+                    debugger;
+                    var datavalue = data;
+                    var myJsonObject = datavalue;
+                    contentType: "application/json";
+                    $.each(myJsonObject, function (i, mobj) {
+
+                        $("#first1").append('<div class="popular-dish-item">'+
+                        '<div class="single-popular-dish">'+
+                            '<div class="popular-dish-img">'+
+                                '<a href="#"><img src="@Url.Content("~/Content/Template/")img/popular-dish/3.jpg" alt=""></a>'+
+                            '</div>'+
+                            '<div class="popular-dish-content">' +
+                            '<a class="pdc-title" href="#">' + mobj.WinnerName + ' <span class="pdc-price">' + mobj.Date + '</span></a>' +
+                            '<span class="pdc-desc">' + mobj.Reward + '</span>' +
+                            '</div>'+
+                     '</div>'+
+                    '</div>');
+
+
+                    });
+
+                },
+                error: function (xhr) {
+                    bootbox.alert('Internel Error...');
+                }
+            });
+
+
+        });
+    </script>
+
+
+
+
+
+<!-- meet-team-area-start -->
+<div class="meet-team-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                <div class="meet-team-head">
+                    <h2 class="meet-team-title">Meet Team</h2>
+                    <p class="meet-team-text">here are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form b</p>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="first">
+            
+           
+        </div>
+    </div>
+</div>
+<!-- meet-team-area-end -->
+<!-- recomanded-dish-start -->
+<div class="recomanded-dishes">
+    <div class="specialized-dinner-head-area rec-dish bg-with-black">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                    <div class="specialized-dinner-head">
+                        <h2 class="sdh-title st-ds">Our Winners</h2>
+                        <p class="sdh-text">This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popular-dish-content-area">
+        <div class="container-fluid">
+            <div class="popular-dish-item-row">
+                <div class="clearfix" id="first1">
+                  
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</div>
+<!-- recomanded-dish-end -->

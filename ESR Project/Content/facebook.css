@@ -1,0 +1,587 @@
+﻿@import url('//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
+
+*, *::before, *::after {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+::-webkit-input-placeholder {
+    color: #C6C9D0;
+}
+
+:-moz-placeholder {
+    color: #C6C9D0;
+}
+
+::-moz-placeholder {
+    color: #C6C9D0;
+}
+
+:-ms-input-placeholder {
+    color: #C6C9D0;
+}
+
+
+
+a {
+    color: #3B5998;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+
+
+       
+
+section, footer {
+    margin: 0 auto;
+    padding: 0 10px;
+    position: relative;
+}
+
+footer {
+    color:black;
+ 
+    text-align: center;
+}
+
+    footer > h4, footer > p {
+        margin: 0;
+    }
+
+textarea {
+    border: 0;
+    font-size: 13px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0 10px;
+    width: calc(100% - 20px) !important;
+}
+
+.container {
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+}
+
+    .container > h2 {
+        color: #9298A4;
+        font-weight: 400;
+        letter-spacing: -1px;
+        margin: 140px auto 80px;
+        padding:;
+        text-align: center;
+    }
+
+        .container > h2:first-child {
+            margin: 40px auto 80px;
+        }
+
+    .container > .box {
+        background: #FFF;
+        border-radius: 4px;
+        box-shadow: 0 0 50px 5px rgba(0,0,0,.25);
+        height: auto;
+        margin-bottom:30px;
+      
+        overflow: hidden;
+        padding: 20px 0 0;
+        position: relative;
+        width:1100px;
+        max-width:1100px;
+    }
+
+        .container > .box > [class*="box-"] {
+            margin: 0 auto;
+            padding: 0 30px;
+            position: relative;
+        }
+
+            .container > .box > [class*="box-"] img {
+                display: block;
+                width: 100%;
+            }
+
+        .container > .box > .box-header {
+            margin: 0 auto;
+            padding: 0 30px 10px;
+            width: initial;
+        }
+
+            .container > .box > .box-header > h3 {
+                font-size: 15px;
+                font-weight: 700;
+                height: 60px;
+                margin: 5px auto;
+                overflow: hidden;
+                padding: 5px 0 0;
+                position: relative;
+            }
+
+                .container > .box > .box-header > h3 > a {
+                    margin: 0;
+                    overflow: hidden;
+                    padding: 0;
+                    position: relative;
+                }
+
+                .container > .box > .box-header > h3 > span {
+                    color: #9197A3;
+                    display: block;
+                    font-size: 13px;
+                    font-weight: 400;
+                    margin-top: -8px;
+                }
+
+                    .container > .box > .box-header > h3 > span .fa {
+                        font-size: 15px;
+                        margin-left: 5px;
+                    }
+
+            .container > .box > .box-header > span {
+                background: #F4F4F4;
+                border-radius: 3px;
+                color: #BCBFC6;
+                cursor: pointer;
+                font-size: 24px;
+                height: 18px;
+                line-height: 18px;
+                margin: 5px auto 0;
+                padding: 3px 4px;
+                position: absolute;
+                right: 40px;
+                top: 0;
+            }
+
+                .container > .box > .box-header > span:hover {
+                    color: #888;
+                }
+
+                .container > .box > .box-header > span > i {
+                    height: 18px;
+                    line-height: 18px;
+                }
+
+            .container > .box > .box-header img {
+                border-radius: 100px;
+                float: left;
+                height: 60px;
+                margin: -5px 20px 0 0;
+                object-fit: cover;
+                width: 60px;
+            }
+
+        .container > .box > .box-content {
+            margin: 0;
+            overflow: hidden;
+            padding: 0;
+            position: relative;
+            width: initial;
+        }
+
+            .container > .box > .box-content > .content {
+                height: auto;
+                margin: 0;
+                overflow: hidden;
+                padding: 0;
+                position: relative;
+                width: initial;
+            }
+
+            .container > .box > .box-content > .bottom {
+                margin: 0 auto;
+                padding: 0 30px;
+                position: relative;
+                width: initial;
+            }
+
+                .container > .box > .box-content > .bottom > p {
+                    color: #71747A;
+                    font-size: 15px;
+                    line-height: 20px;
+                    margin: 0;
+                    padding: 20px 0;
+                }
+
+                .container > .box > .box-content > .bottom > span {
+                    background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0));
+                    height: 160px;
+                    left: 0;
+                    line-height: 160px;
+                    margin: 0 auto;
+                    overflow: hidden;
+                    padding: 0;
+                    position: absolute;
+                    text-align: right;
+                    top: -160px;
+                    vertical-align: bottom;
+                    width: 100%;
+                }
+
+                    .container > .box > .box-content > .bottom > span > span {
+                        background: rgba(0,0,0,.35);
+                        border-radius: 4px;
+                        bottom: 0;
+                        color: #FFF;
+                        cursor: pointer;
+                        font-size: 20px;
+                        margin: 0 30px 25px auto;
+                        opacity: .75;
+                        overflow: hidden;
+                        padding: 10px;
+                        position: absolute;
+                        right: 0;
+                        top: auto;
+                        -webkit-transition: all .25s ease-in-out;
+                        -moz-transition: all .25s ease-in-out;
+                        transition: all .25s ease-in-out;
+                    }
+
+                        .container > .box > .box-content > .bottom > span > span:hover {
+                            opacity: 1;
+                        }
+
+        .container > .box > .box-likes {
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 0 30px;
+            position: relative;
+        }
+
+            .container > .box > .box-likes > .row {
+                border-top: 1px solid #F4F4F4;
+                padding: 20px 0;
+            }
+
+                .container > .box > .box-likes > .row > span {
+                    display: inline-block;
+                    font-size: 13px;
+                    margin: 0 2px 0 0;
+                    position: relative;
+                   vertical-align: middle;
+                }
+
+                .container > .box > .box-likes > .row:first-child {
+                    float: left;
+                    width: 60%;
+                }
+
+                .container > .box > .box-likes > .row:last-child {
+                    float: left;
+                    text-align: end;
+                    width: 40%;
+                }
+
+                .container > .box > .box-likes > .row:first-child > span:nth-child(4) {
+                    background: #4D679F;
+                    border-radius: 50px;
+                    font-weight: bold;
+                    padding: 0 8px 0 6px;
+                }
+
+                    .container > .box > .box-likes > .row:first-child > span:nth-child(4) > a {
+                        color: #FFF;
+                    }
+
+                .container > .box > .box-likes > .row:first-child > span,
+                .container > .box > .box-likes > .row:last-child > span {
+                    color: #9197A3;
+                }
+
+                .container > .box > .box-likes > .row:last-child > span {
+                    display: inline-block;
+                    verrtical-align: middle;
+                }
+
+                .container > .box > .box-likes > .row img {
+                    border-radius: 100px;
+                    height: 28px;
+                    object-fit: cover;
+                    width: 28px;
+                }
+
+        .container > .box > .box-buttons {
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 0;
+            position: relative;
+        }
+
+            .container > .box > .box-buttons *, *::before, *::after {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            .container > .box > .box-buttons > .row {
+                border-bottom: 1px solid #F4F4F4;
+                border-top: 1px solid #F4F4F4;
+                overflow: hidden;
+                padding: 0;
+                position: relative;
+            }
+
+                .container > .box > .box-buttons > .row > button:last-child {
+                    border: 0;
+                }
+
+                .container > .box > .box-buttons > .row > button {
+                    background: #FFF;
+                    border: 0;
+                    border-right: 1px solid #F4F4F4;
+                    color: #9197A3;
+                    font-size: 20px;
+                    float: left;
+                    height: 60px;
+                    line-height: 60px;
+                    margin: 0;
+                    *outline: 1px #08F;
+                    padding: 0;
+                    width: 33.33333333333%;
+                }
+
+                    .container > .box > .box-buttons > .row > button:hover {
+                        background: #F5F5F5;
+                        color: #7D8696;
+                    }
+
+                    .container > .box > .box-buttons > .row > button:focus {
+                        background: #F0F2F2;
+                        color: #6C7588;
+                        box-shadow: inset 0 0 10px rgba(0,0,0,.2);
+                        outline-color: #08F;
+                    }
+
+        .container > .box > .box-click {
+            color: #4D679F;
+            font-size: 13px;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 10px 30px;
+            position: relative;
+        }
+
+            .container > .box > .box-click > span {
+                cursor: pointer;
+            }
+
+                .container > .box > .box-click > span i {
+                    font-size: 18px;
+                    margin-right: 5px;
+                }
+
+        .container > .box > .box-comments {
+            margin: 0;
+            overflow: hidden;
+            padding: 0;
+            position: relative;
+        }
+
+            .container > .box > .box-comments > .comment {
+                border-top: 1px solid #F4F4F4;
+                margin: 0;
+                overflow: hidden;
+                padding: 16px 30px;
+                position: relative;
+            }
+
+                .container > .box > .box-comments > .comment > img {
+                    border-radius: 100px;
+                    float: left;
+                    height: 56px;
+                    margin: 0;
+                    object-fit: cover;
+                    width: 56px;
+                }
+
+                .container > .box > .box-comments > .comment > .content {
+                    height: auto;
+                    line-height: 20px;
+                    margin: 0 0 0 70px;
+                    overflow: hidden;
+                    padding: 0;
+                    position: relative;
+                    width: initial;
+                }
+
+                    .container > .box > .box-comments > .comment > .content > h3 {
+                        float: left;
+                        font-size: 14px;
+                        font-weight: 600;
+                        margin: 4px auto 0;
+                        text-transform: capitalize;
+                        width: 150px;
+                    }
+
+                        .container > .box > .box-comments > .comment > .content > h3 > span {
+                            color: #9197A3;
+                            display: block;
+                            font-size: 12px;
+                            font-weight: 400;
+                            text-transform: none;
+                        }
+
+                    .container > .box > .box-comments > .comment > .content > p {
+                        color: #4B4D53;
+                        font-size: 13px;
+                        margin: 0;
+                        padding: 0;
+                    }
+
+        .container > .box > .box-new-comment {
+            background: #9298A4;
+            margin: 0;
+            overflow: hidden;
+            padding: 20px 30px;
+            position: relative;
+        }
+
+            .container > .box > .box-new-comment > img {
+                border-radius: 100px;
+                float: left;
+                height: 40px;
+                margin: 0;
+                object-fit: cover;
+                width: 40px;
+            }
+
+            .container > .box > .box-new-comment > .content {
+                border-radius: 20px;
+                margin: 4px 0 0 52px;
+                overflow: hidden;
+                padding: 0;
+                position: relative;
+                width: initial;
+                -webkit-transition: all .25s ease-in-out;
+                -moz-transition: all .25s ease-in-out;
+                transition: all .25s ease-in-out;
+            }
+
+                .container > .box > .box-new-comment > .content > .row {
+                    background: transparent;
+                    display: inline-block;
+                    height: 32px;
+                    overflow: hidden;
+                    position: relative;
+                    vertical-align: middle;
+                    width: 100%;
+                    -webkit-transition: all .25s ease-in-out;
+                    -moz-transition: all .25s ease-in-out;
+                    transition: all .25s ease-in-out;
+                }
+
+                    .container > .box > .box-new-comment > .content > .row:last-child {
+                        color: #C6C9D0;
+                        font-size: 22px;
+                        height: 28px;
+                        line-height: 27px;
+                        margin: 2px 0;
+                        position: absolute;
+                        text-align: center;
+                        top: 0;
+                        right: 10px;
+                        width: 40px;
+                    }
+
+                        .container > .box > .box-new-comment > .content > .row:last-child > span {
+                            cursor: pointer;
+                        }
+
+                    .container > .box > .box-new-comment > .content > .row > textarea {
+                        border: 1px solid transparent;
+                        border-radius: 20px;
+                        color: #555;
+                        outline: 0;
+                        padding: 0 40px 0 10px;
+                        resize: none;
+                        width: calc(100% - 52px) !important;
+                        -webkit-transition: all .25s ease-in-out;
+                        -moz-transition: all .25s ease-in-out;
+                        transition: all .25s ease-in-out;
+                    }
+
+        .container > .box.update,
+        .container > .box.text {
+            border: 1px solid #E0E1E4;
+            box-shadow: none;
+            padding: 20px 0 0;
+        }
+
+            .container > .box.update > .box-header,
+            .container > .box.text > .box-header {
+                padding: 0 30px;
+            }
+
+                .container > .box.update > .box-header > span,
+                .container > .box.text > .box-header > span {
+                    background: transparent;
+                    color: #9298A4;
+                    font-size: 32px;
+                    margin: -10px auto 0;
+                }
+
+            .container > .box.update > .box-content > .content > p,
+            .container > .box.text > .box-content > .content > p {
+                border-top: 1px solid #F4F4F4;
+                color: #4D5057;
+                font-size: 14px;
+                line-height: 22px;
+                padding: 26px 30px;
+            }
+
+            .container > .box.update > .box-content > .content > .img {
+                margin: 0;
+                overflow: hidden;
+                padding: 0;
+                position: relative;
+                width: initial;
+            }
+
+                .container > .box.update > .box-content > .content > .img:before {
+                    border: 1px solid rgba(0,0,0,.25);
+                    bottom: 0;
+                    content: "";
+                    height: 100%;
+                    left: 0;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    width: 100%;
+                }
+
+            .container > .box.text > .box-buttons > .row > button {
+                font-size: 13px;
+            }
+
+                .container > .box.text > .box-buttons > .row > button > span {
+                    font-size: 20px;
+                }
+
+        .container > .box.image > .box-new-comment > .content,
+        .container > .box.image > .box-new-comment > .content > .row > textarea,
+        .container > .box.video > .box-new-comment > .content,
+        .container > .box.video > .box-new-comment > .content > .row > textarea {
+            background: #9298A4;
+            -webkit-transition: all .25s ease-in-out;
+            -moz-transition: all .25s ease-in-out;
+            transition: all .25s ease-in-out;
+        }
+
+            .container > .box > .box-new-comment > .content > .row > textarea:focus,
+            .container > .box.image > .box-new-comment > .content:active > .row {
+                background: #FFF;
+            }
+
+        .container > .box > .box-new-comment > .content > .row > textarea:focus,
+        .container > .box.video .box-new-comment > .content:active > .row {
+            background: #FFF;
+        }
+
+
+
